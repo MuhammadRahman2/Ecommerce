@@ -9,10 +9,13 @@ class CataLogImage extends StatelessWidget {
       : assert(image != null),
         super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Image.network(
       image!,
-    ).box.rounded.color(MyThemes.creamColor).make().p16().w40(context);
+    ).box.rounded.p8.color(context.canvasColor).make().p16().w40(context);
   }
 }
+
+

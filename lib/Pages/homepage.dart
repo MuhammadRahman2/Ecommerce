@@ -1,14 +1,16 @@
 import 'dart:convert';
-
 import 'package:ecommerces/Model/model.dart';
 import 'package:ecommerces/Widget/HomeWidget/catalog_header.dart';
 import 'package:ecommerces/Widget/HomeWidget/catalog_image.dart';
 import 'package:ecommerces/Widget/HomeWidget/catalog_list.dart';
 
 import 'package:ecommerces/Widget/themes.dart';
+import 'package:ecommerces/utils/routes.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:velocity_x/velocity_x.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -16,8 +18,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final int days = 30;
-
-  final String name = "Codepur";
 
   @override
   void initState() {
@@ -37,10 +37,20 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: MyThemes.creamColor,
+        backgroundColor: context.canvasColor,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, MyRoutes.cart);
+          },
+          backgroundColor: context.theme.buttonColor,
+          child: Icon(
+            CupertinoIcons.cart,
+            color: Colors.white,
+          ),
+        ),
         body: SafeArea(
           child: Container(
             padding: Vx.m32,
@@ -48,7 +58,8 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CatalogHeader(),
-                if (CatalogModel.items != null && CatalogModel.items!.isNotEmpty)
+                if (CatalogModel.items != null &&
+                    CatalogModel.items!.isNotEmpty)
                   CataLogList().py16().expand()
                 else
                   CircularProgressIndicator().centered().expand(),
@@ -72,42 +83,36 @@ class CataLogItem extends StatelessWidget {
       child: Row(
         children: [
           Hero(
-            tag: Key(catalog!.id.toString()),
-            child: CataLogImage(
-            image: catalog!.image)),
+              tag: Key(catalog!.id.toString()),
+              child: CataLogImage(image: catalog!.image)),
           Expanded(
               child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              catalog!.name.text.lg.color(MyThemes.darkBluishColor).bold.make(),
+              catalog!.name.text.lg.color(context.accentColor).bold.make(),
               catalog!.desc.text.color(Colors.grey).medium.make(),
-              10.heightBox,
+              'more detail click on item'.text.color(Colors.grey).make(),
+              20.heightBox,
               ButtonBar(
                 alignment: MainAxisAlignment.spaceBetween,
                 buttonPadding: EdgeInsets.zero,
                 children: [
                   '\$ ${catalog!.price}'.text.bold.xl.make(),
                   ElevatedButton(
-                    onPressed: (){
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                        MyThemes.darkBluishColor
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(context.theme.buttonColor),
+                        shape: MaterialStateProperty.all(StadiumBorder()),
                       ),
-                      shape: MaterialStateProperty.all(
-                        StadiumBorder()
-                        ),
-                       ),
-                    child: "Buy".text.make()
-                    )
-                  ],
+                      child: "Add Cart".text.make())
+                ],
               ).pOnly(right: 8.0),
             ],
           ))
         ],
       ),
-    ).white.rounded.square(150).make().py(16);
+    ).color(context.cardColor).rounded.square(200).make().py(16);
   }
 }
-

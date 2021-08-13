@@ -8,7 +8,7 @@ class CatalogHeader extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        "Catalog".text.bold.xl5.color(MyThemes.darkBluishColor).make(),
+        "Catalog".text.bold.xl5.color(context.accentColor).make(),
         "Trending Product".text.xl2.make()
       ],
     );
