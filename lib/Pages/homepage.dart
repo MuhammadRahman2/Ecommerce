@@ -3,8 +3,6 @@ import 'package:ecommerces/Model/model.dart';
 import 'package:ecommerces/Widget/HomeWidget/catalog_header.dart';
 import 'package:ecommerces/Widget/HomeWidget/catalog_image.dart';
 import 'package:ecommerces/Widget/HomeWidget/catalog_list.dart';
-
-import 'package:ecommerces/Widget/themes.dart';
 import 'package:ecommerces/utils/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
