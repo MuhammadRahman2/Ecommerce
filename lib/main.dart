@@ -1,14 +1,16 @@
+import 'package:ecommerces/Core/core.dart';
 import 'package:ecommerces/Pages/cartpage.dart';
 import 'package:ecommerces/Pages/homepage.dart';
 import 'package:ecommerces/Pages/login.dart';
 import 'package:ecommerces/Widget/themes.dart';
 import 'package:ecommerces/utils/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 // import 'package:google_fonts/google_fonts.dart';
 
 
 void main(List<String> args) {
-  runApp(MyApp());
+  runApp(VxState(store: MyStore(), child: MyApp()));
 }
 class MyApp extends StatelessWidget {
   const MyApp({ Key? key }) : super(key: key);
@@ -17,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Shoping App",
+      
       themeMode: ThemeMode.system,
       theme: MyThemes.lightTheme(context),
       darkTheme: MyThemes.darkTheme(context),

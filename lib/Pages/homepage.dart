@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:ecommerces/Model/model.dart';
+import 'package:ecommerces/Widget/HomeWidget/add_to_cart.dart';
 import 'package:ecommerces/Widget/HomeWidget/catalog_header.dart';
 import 'package:ecommerces/Widget/HomeWidget/catalog_image.dart';
 import 'package:ecommerces/Widget/HomeWidget/catalog_list.dart';
@@ -69,11 +70,11 @@ class _HomePageState extends State<HomePage> {
 }
 
 class CataLogItem extends StatelessWidget {
-  final Item? catalog;
-
   const CataLogItem({Key? key, @required this.catalog})
       : assert(catalog != null),
         super(key: key);
+
+  final Item? catalog;
 
   @override
   Widget build(BuildContext context) {
@@ -97,14 +98,7 @@ class CataLogItem extends StatelessWidget {
                 buttonPadding: EdgeInsets.zero,
                 children: [
                   '\$ ${catalog!.price}'.text.bold.xl.make(),
-                  ElevatedButton(
-                      onPressed: () {},
-                      style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(context.theme.buttonColor),
-                        shape: MaterialStateProperty.all(StadiumBorder()),
-                      ),
-                      child: "Add Cart".text.make())
+                  AddToCard(catalog: catalog!)
                 ],
               ).pOnly(right: 8.0),
             ],
@@ -114,3 +108,5 @@ class CataLogItem extends StatelessWidget {
     ).color(context.cardColor).rounded.square(200).make().py(16);
   }
 }
+
+
